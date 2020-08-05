@@ -1,12 +1,13 @@
 # Stack-Game-Template
-This is a template for the homebrew games i do such as 3DEins, 3DVier and 3DZwei.
+This is a template for the homebrew games i do such as 3DEins, 3DVier, 3DZwei or BlockEscape3DS.
 
 ## Games
-### All of those Games are made by me, but some are part of Universal-Team. You'll find games I've being working on below.
+### All of those Games are made by me, but they are part of Universal-Team. You'll find games I've being working on below.
 
 - [3DEins - An UNO Cardgame clone.](https://github.com/Universal-Team/3DEins)
 - [3DVier - A Connect-Four clone.](https://github.com/Universal-Team/3DVier)
-- [3DZwei - A Memory Cardgame clone.](https://github.com/SuperSaiyajinStackZ/3DZwei)
+- [3DZwei - A Memory Cardgame clone.](https://github.com/Universal-Team/3DZwei)
+- [BlockEscape3DS - A block escape puzzle game for Nintendo 3DS.](https://github.com/Universal-Team/BlockEscape3DS)
 
 All of these projects use [Universal-Core](https://github.com/Universal-Team/Universal-Core) as their submodule.
 

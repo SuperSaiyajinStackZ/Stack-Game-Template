@@ -53,7 +53,7 @@ VERSION_MICRO := 0
 
 VERSION_STRING := "$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)"
 #---------------------------------------------------------------------------------
-TARGET		:=	Stack-Game
+TARGET		:=	StackGame
 BUILD		:=	build
 SRCCORE		:= ../core/source
 INCCORE		:= ../core/include
@@ -67,7 +67,7 @@ GRAPHICS	:=	assets/gfx
 ROMFS		:=	romfs
 GFXBUILD	:=	$(ROMFS)/gfx
 APP_AUTHOR	:=	SuperSaiyajinStackZ
-APP_DESCRIPTION := A Template for Stack-Games.
+APP_DESCRIPTION := A Template for StackGames.
 ICON		:=	app/icon.png
 BNR_IMAGE	:=  app/banner.png
 RSF_FILE	:=	app/build-cia.rsf

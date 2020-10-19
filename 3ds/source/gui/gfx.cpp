@@ -25,98 +25,34 @@
 */
 
 #include "common.hpp"
-#include "config.hpp"
 
-extern std::unique_ptr<Config> config;
-extern C2D_SpriteSheet characters, sprites;
+extern C2D_SpriteSheet sprites;
 
-void GFX::DrawTop(bool useBars) {
+/*
+	Zeichne eine basis für den Top Screen.
+*/
+void GFX::DrawBaseTop() {
 	Gui::ScreenDraw(Top);
-	if (useBars) {
-		Gui::Draw_Rect(0, 0, 400, 25, config->barColor());
-		Gui::Draw_Rect(0, 25, 400, 190, config->bgColor());
-		Gui::Draw_Rect(0, 215, 400, 25, config->barColor());
-	} else {
-		Gui::Draw_Rect(0, 0, 400, 240, config->bgColor());
-	}
+	Gui::Draw_Rect(0, 0, 400, 240, BG_COLOR);
 }
 
-void GFX::DrawBottom(bool useBars) {
+/*
+	Zeichne eine basis für den Touch Screen.
+*/
+void GFX::DrawBaseBottom() {
 	Gui::ScreenDraw(Bottom);
-	if (useBars) {
-		Gui::Draw_Rect(0, 0, 320, 25, config->barColor());
-		Gui::Draw_Rect(0, 25, 320, 190, config->bgColor());
-		Gui::Draw_Rect(0, 215, 320, 25, config->barColor());
-	} else {
-		Gui::Draw_Rect(0, 0, 320, 240, config->bgColor());
-	}
+	Gui::Draw_Rect(0, 0, 320, 240, BG_COLOR);
 }
 
+/*
+	Zeichne einen Sprite von der sprites spritesheet.
+
+	int index: Der index des Sprites.
+	int x: Die X Position des Sprites.
+	int y: Die Y Position des Sprites.
+	float ScaleX: Breiten-Skalierung.
+	float ScaleY: Höhen-Skalierung.
+*/
 void GFX::DrawSprite(int index, int x, int y, float ScaleX, float ScaleY) {
 	Gui::DrawSprite(sprites, index, x, y, ScaleX, ScaleY);
-}
-
-void GFX::DrawFileBrowseBG(bool isTop) {
-	isTop ? Gui::ScreenDraw(Top) : Gui::ScreenDraw(Bottom);
-	Gui::Draw_Rect(0, 0, isTop ? 400 : 320, 27, config->barColor());
-	Gui::Draw_Rect(0, 27, isTop ? 400 : 320, 31, config->bgColor());
-	Gui::Draw_Rect(0, 58, isTop ? 400 : 320, 31, config->bgColor() & C2D_Color32(255, 255, 255, 200));
-	Gui::Draw_Rect(0, 89, isTop ? 400 : 320, 31, config->bgColor());
-	Gui::Draw_Rect(0, 120, isTop ? 400 : 320, 31, config->bgColor() & C2D_Color32(255, 255, 255, 200));
-	Gui::Draw_Rect(0, 151, isTop ? 400 : 320, 31, config->bgColor());
-	Gui::Draw_Rect(0, 182, isTop ? 400 : 320, 31, config->bgColor() & C2D_Color32(255, 255, 255, 200));
-	Gui::Draw_Rect(0, 213, isTop ? 400 : 320, 27, config->barColor());
-}
-
-void GFX::DrawButtonSelector(int x, int y, float ScaleX, float ScaleY, bool useSmall) {
-	static float timer			= 0.0f;
-	float highlight_multiplier	= fmax(0.0, fabs(fmod(timer, 1.0) - 0.5) / 0.5);
-	u8 r						= config->selectorColor() & 0xFF;
-	u8 g						= (config->selectorColor() >> 8) & 0xFF;
-	u8 b						= (config->selectorColor() >> 16) & 0xFF;
-	u32 color = C2D_Color32(r + (255 - r) * highlight_multiplier, g + (255 - g) * highlight_multiplier, b + (255 - b) * highlight_multiplier, 255);
-	C2D_ImageTint tint;
-	C2D_SetImageTint(&tint, C2D_TopLeft, color, 1);
-	C2D_SetImageTint(&tint, C2D_TopRight, color, 1);
-	C2D_SetImageTint(&tint, C2D_BotLeft, color, 1);
-	C2D_SetImageTint(&tint, C2D_BotRight, color, 1);
-
-	C2D_DrawImageAt(C2D_SpriteSheetGetImage(sprites, useSmall ? sprites_btnSelector2_idx : sprites_btnSelector_idx), x, y, 0.5f, &tint, ScaleX, ScaleY);
-
-	timer += .030;
-}
-
-// Player Character.
-void GFX::DrawPlayer(int x, int y, float ScaleX, float ScaleY, int player) {
-	switch (player) {
-		case 0:
-			Gui::DrawSprite(characters, chars_char1_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 1:
-			Gui::DrawSprite(characters, chars_char2_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 2:
-			Gui::DrawSprite(characters, chars_char3_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 3:
-			Gui::DrawSprite(characters, chars_char4_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 4:
-			Gui::DrawSprite(characters, chars_char5_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 5:
-			Gui::DrawSprite(characters, chars_char6_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 6:
-			Gui::DrawSprite(characters, chars_char7_idx, x, y, ScaleX, ScaleY);
-			break;
-		case 7:
-			Gui::DrawSprite(characters, chars_char8_idx, x, y, ScaleX, ScaleY);
-			break;
-	}
-}
-
-void GFX::Button(const ButtonStruct btn) {
-	Gui::Draw_Rect(btn.X, btn.Y, btn.xSize, btn.ySize, config->buttonColor());
-	Gui::DrawStringCentered(btn.X - 160 + (btn.xSize/2), btn.Y + (btn.ySize/2) - 10, 0.6f, config->textColor(), btn.Text, btn.X-10, btn.Y-5);
 }

@@ -24,44 +24,14 @@
 		  reasonable ways as different from the original version.
 */
 
-#include "gameScreen.hpp"
+#ifndef _STACK_GAME_TEMPLATE_COMMON_HPP
+#define _STACK_GAME_TEMPLATE_COMMON_HPP
 
-extern bool exiting;
-extern int fadeAlpha;
+/* Hier sind alle notwendigen Headers gelistet. */
+#include "gfx.hpp"
+#include "gui.hpp"
+#include "msg.hpp"
+#include "overlay.hpp"
+#include "screenCommon.hpp"
 
-/*
-	Initialisiere den Spiel-Screen.
-*/
-GameScreen::GameScreen() {
-	this->currentGame = std::make_unique<Game>();
-}
-
-/*
-	Zeichne das Spiel.
-*/
-void GameScreen::Draw(void) const {
-	GFX::DrawBaseTop();
-	Gui::Draw_Rect(0, 0, 400, 25, BAR_COLOR);
-	Gui::Draw_Rect(0, 215, 400, 25, BAR_COLOR);
-
-	Gui::DrawStringCentered(0, 1, 0.7f, TEXT_COLOR, V_APPNAME " - GameScreen", 390);
-	Gui::DrawStringCentered(0, 218, 0.6f, TEXT_COLOR, "Press X to show 'Hello!' from the example.", 390);
-	if (fadeAlpha > 0) Gui::Draw_Rect(0, 0, 400, 240, C2D_Color32(0, 0, 0, fadeAlpha));
-
-	GFX::DrawBaseBottom();
-	if (fadeAlpha > 0) Gui::Draw_Rect(0, 0, 320, 240, C2D_Color32(0, 0, 0, fadeAlpha));
-}
-
-/*
-	Die Spiel-Logik.
-*/
-void GameScreen::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
-	if (hDown & KEY_X) {
-		Msg::DisplayWaitMsg(this->currentGame->example()); // Zeige "Hello!" von der Beispiel-Funktion.
-	}
-
-	/* Beende die app. */
-	if (hDown & KEY_START) {
-		exiting = true;
-	}
-}
+#endif
